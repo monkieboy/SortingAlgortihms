@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Sort;
 
-namespace BubbleSort.Tests
+namespace BubbleSort
 {
     public class BubbleSorter : ISorter
     {
         private int allPassed;
 
-        public IEnumerable<int> Sort(int[] numberList)
+        public IEnumerable<int> IntegerSort(int[] numberList)
         {
             var temp = numberList;
             var max = temp.Length;

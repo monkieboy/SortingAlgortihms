@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using Sort;
 
 namespace BubbleSort.Tests
 {
@@ -19,7 +20,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 1 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1);
         }
 
         [Test]
@@ -27,7 +28,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 2, 1 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1, 2);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 2);
         }
 
         [Test]
@@ -35,7 +36,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 2, 1, 3 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1, 2, 3);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 2, 3);
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 4, 3, 2, 1 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1, 2, 3, 4);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 2, 3, 4);
         }
 
         [Test]
@@ -51,7 +52,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 4, 3, 2, 1, 9, 8, 7, 6, 5 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1, 2, 3, 4, 5, 6, 7, 8, 9);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 2, 3, 4, 5, 6, 7, 8, 9);
         }
 
         [Test]
@@ -59,7 +60,7 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 4, 3, 1, 9, 8, 7, 5 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(1, 3, 4, 5, 7, 8, 9);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 3, 4, 5, 7, 8, 9);
         }
 
         [Test]
@@ -67,7 +68,39 @@ namespace BubbleSort.Tests
         {
             var numberList = new[] { 4, 3, 1, 0, 9, 8, 7, 5 };
 
-            sorter.Sort(numberList).Should().ContainInOrder(0, 1, 3, 4, 5, 7, 8, 9);
+            sorter.IntegerSort(numberList).Should().ContainInOrder(0, 1, 3, 4, 5, 7, 8, 9);
+        }
+
+        [Test]
+        public void Should_return_00001345789_when_given_04310980750()
+        {
+            var numberList = new[] { 0, 4, 3, 1, 0, 9, 8, 0, 7, 5, 0 };
+
+            sorter.IntegerSort(numberList).Should().ContainInOrder(0, 0, 0, 0, 1, 3, 4, 5, 7, 8, 9);
+        }
+
+        [Test]
+        public void Should_return_0000_when_given_0000()
+        {
+            var numberList = new[] { 0, 0, 0, 0 };
+
+            sorter.IntegerSort(numberList).Should().ContainInOrder(0, 0, 0, 0);
+        }
+
+        [Test]
+        public void Should_return_1111_when_given_1111()
+        {
+            var numberList = new[] { 1, 1, 1, 1 };
+
+            sorter.IntegerSort(numberList).Should().ContainInOrder(1, 1, 1, 1);
+        }
+
+        [Test]
+        public void Should_return_an_empty_list_if_given_an_empty_list()
+        {
+            var numberList = new int[0];
+
+            sorter.IntegerSort(numberList).Should().BeEmpty();
         }
     }
 }
